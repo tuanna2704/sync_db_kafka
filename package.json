@@ -1,0 +1,16 @@
+{
+  "name": "debezium",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-rdkafka": "^2.11.0",
+    "pg": "^8.7.1"
+  }
+}

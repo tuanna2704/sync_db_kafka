@@ -25,6 +25,9 @@ services:
     environment:
      - POSTGRES_USER=postgres
      - POSTGRES_PASSWORD=postgres
+    volumes: 
+     # copy the sql script to create tables
+     - ./create_main_db.sql:/docker-entrypoint-initdb.d/create_main_db.sql
   connect:
     image: debezium/connect:1.1
     container_name: connect
@@ -38,3 +41,23 @@ services:
      - GROUP_ID=sde_group
      - CONFIG_STORAGE_TOPIC=sde_storage_topic
      - OFFSET_STORAGE_TOPIC=sde_offset_topic
+  webapp:
+    build: .
+    container_name: webapp
+    command: tail -f /dev/null
+    ports: 
+     - 8080:8080
+    links:
+     - kafka
+     - postgres_microservice
+  postgres_microservice:
+    image: postgres:12
+    container_name: postgres_microservice
+    ports:
+     - 5433:5432
+    environment:
+     - POSTGRES_USER=postgres
+     - POSTGRES_PASSWORD=postgres
+    # volumes: 
+    #  # copy the sql script to create tables
+    #  - ./create_microservice_db.sql:/docker-entrypoint-initdb.d/create_microservice_db.sql

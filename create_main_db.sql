@@ -1,3 +1,4 @@
+CREATE DATABASE exampledb;
 CREATE SCHEMA exampledb;
 SET search_path TO exampledb,public;
 CREATE TABLE exampledb.prescription (
@@ -10,7 +11,6 @@ CREATE TABLE exampledb.prescription (
     primary key(prescription_id)
 );
 ALTER TABLE exampledb.prescription replica identity FULL;
-
 
 -- U
 -- update exampledb.prescription set prescription_quantity = 100 where prescription_id=1000;
